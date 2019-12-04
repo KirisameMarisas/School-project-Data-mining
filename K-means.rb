@@ -40,20 +40,9 @@ module K_Mean
 
   def array_delete(array, element)
     #puts array.inspect
-
-    array.each do |floor|
-      if (floor.class.name != Array.name)
-        next
-      end
-
-      if (floor.length > 0)
-        array_delete(floor, element)
-        if (floor.delete(element) != nil)
-          return
-        end
-      end
-    end
-    return array.delete(element)
+    array.delete(element)
+    array.each { |e| array_delete(e,element) if e.is_a?(Array)}
+    #array.delete([])
   end
 
   def get_average(array)
